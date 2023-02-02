@@ -1,8 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+
 const Color primaryColor = Color(0xFFFFFFFF);
-const Color secondaryColor = Color(0xFF6B38FB);
+const Color secondaryColor = Color.fromARGB(255, 194, 194, 194);
+const Color darkPrimaryColor = Color(0xFF000000);
+const Color darkSecondaryColor = Color.fromARGB(255, 15, 15, 15);
+
+ThemeData lightTheme = ThemeData(
+  colorScheme: ThemeData.light().colorScheme.copyWith(
+        primary: primaryColor,
+        onPrimary: Colors.black,
+        secondary: secondaryColor,
+      ),
+  scaffoldBackgroundColor: Colors.white,
+  visualDensity: VisualDensity.adaptivePlatformDensity,
+  textTheme: myTextTheme.apply(
+    bodyColor: darkSecondaryColor,
+    displayColor: darkSecondaryColor
+  ),
+  appBarTheme: const AppBarTheme(elevation: 0),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: secondaryColor,
+      foregroundColor: Colors.white,
+      textStyle: const TextStyle(),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(0),
+        ),
+      ),
+    ),
+  ),
+);
+
+ThemeData darkTheme = ThemeData.dark().copyWith(
+  colorScheme: ThemeData.dark().colorScheme.copyWith(
+        primary: darkPrimaryColor,
+        onPrimary: Colors.black,
+        secondary: darkSecondaryColor,
+      ),
+  visualDensity: VisualDensity.adaptivePlatformDensity,
+  textTheme: myTextTheme.apply(
+    bodyColor: secondaryColor ,
+    displayColor: secondaryColor 
+  ),
+  appBarTheme: const AppBarTheme(elevation: 0),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: secondaryColor,
+      foregroundColor: Colors.white,
+      textStyle: const TextStyle(color: primaryColor),
+      shape: const RoundedRectangleBorder(
+        borderRadius:  BorderRadius.all(
+         Radius.circular(0),
+        ),
+      ),
+    ),
+  ),
+);
+
 
 final TextTheme myTextTheme = TextTheme(
   headline1: GoogleFonts.merriweather(

@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/ui/detail_page.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 import '../data/api/api_service.dart';
 import '../provider/restaurant_provider.dart';
 import '../widget/card_restaurant.dart';
 
-class RestaurantSearch extends StatefulWidget {
+class RestaurantPage extends StatefulWidget {
   static const routeName = '/restaurant_search';
-  const RestaurantSearch({super.key});
+  const RestaurantPage({super.key});
 
   @override
-  State<RestaurantSearch> createState() => _RestaurantSearchState();
+  State<RestaurantPage> createState() => _RestaurantPageState();
 }
 
-class _RestaurantSearchState extends State<RestaurantSearch> {
-  var _txtSearch = TextEditingController(text: "melt");
+class _RestaurantPageState extends State<RestaurantPage> {
+  var _txtSearch = TextEditingController();
   late RestaurantProvider restaurant;
   @override
   void dispose() {
@@ -37,8 +36,12 @@ class _RestaurantSearchState extends State<RestaurantSearch> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Search",
+                    "Restaurant ",
                     style: Theme.of(context).textTheme.headline4,
+                  ),
+                  Text(
+                    "Recommendation restaurant for you!",
+                    style: Theme.of(context).textTheme.subtitle1,
                   ),
                   const SizedBox(height: 16),
                   Container(
@@ -58,16 +61,21 @@ class _RestaurantSearchState extends State<RestaurantSearch> {
                             if (value.isNotEmpty && value.length > 3) {
                               context
                                   .read<RestaurantProvider>()
-                                  .update(context, value);
+                                  .update(value);
+                            } else if (value.isEmpty) {
+                              return context
+                                  .read<RestaurantProvider>()
+                                  .allRestaurant();
                             }
                           },
                           decoration: const InputDecoration(
                               hintText: "Search Place",
                               hintStyle:
-                                  TextStyle(fontSize: 16, color: Colors.grey),
+                                  TextStyle(fontSize: 16),
                               prefixIcon: Icon(Icons.search),
                               border: InputBorder.none,
-                              contentPadding: EdgeInsets.symmetric(vertical: 14)),
+                              contentPadding:
+                                  EdgeInsets.symmetric(vertical: 14)),
                         );
                       },
                     ),
